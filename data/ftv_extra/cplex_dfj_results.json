@@ -1,0 +1,82 @@
+{
+ "ftv90": {
+  "n": 91,
+  "OPT": 1579,
+  "cost": 1579.0,
+  "proved": true,
+  "status": 101,
+  "t": 0.647,
+  "cuts": 30,
+  "nodes": 0
+ },
+ "ftv100": {
+  "n": 101,
+  "OPT": 1788,
+  "cost": 1788.0,
+  "proved": true,
+  "status": 101,
+  "t": 0.654,
+  "cuts": 34,
+  "nodes": 3
+ },
+ "ftv110": {
+  "n": 111,
+  "OPT": 1958,
+  "cost": 1958.0,
+  "proved": true,
+  "status": 101,
+  "t": 0.933,
+  "cuts": 64,
+  "nodes": 44
+ },
+ "ftv120": {
+  "n": 121,
+  "OPT": 2166,
+  "cost": 2166.0,
+  "proved": true,
+  "status": 101,
+  "t": 1.582,
+  "cuts": 53,
+  "nodes": 11
+ },
+ "ftv130": {
+  "n": 131,
+  "OPT": 2307,
+  "cost": 2307.0,
+  "proved": true,
+  "status": 101,
+  "t": 1.18,
+  "cuts": 45,
+  "nodes": 0
+ },
+ "ftv140": {
+  "n": 141,
+  "OPT": 2420,
+  "cost": 2420.0,
+  "proved": true,
+  "status": 101,
+  "t": 1.82,
+  "cuts": 51,
+  "nodes": 3
+ },
+ "ftv150": {
+  "n": 151,
+  "OPT": 2611,
+  "cost": 2611.0,
+  "proved": true,
+  "status": 101,
+  "t": 1.237,
+  "cuts": 38,
+  "nodes": 0
+ },
+ "ftv160": {
+  "n": 161,
+  "OPT": 2683,
+  "cost": 2683.0,
+  "proved": true,
+  "status": 101,
+  "t": 2.071,
+  "cuts": 71,
+  "nodes": 13
+ }
+}

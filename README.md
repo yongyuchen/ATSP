@@ -7,7 +7,7 @@ the quasi-polynomial algorithm of Bell and Frieze
 This repository is the artifact for the paper *From Theoretical Bounds to
 Computational Reality: A Quasi-Polynomial Solver for Asymmetric Traveling Salesman
 Problem*. It contains the solver, the optimality-certificate machinery, the
-benchmark drivers, the 19 ATSPLIB instances used in the paper, and the expected
+benchmark drivers, the 27 ATSPLIB instances used in the paper, and the expected
 values used to check a run.
 
 The solver returns a tour **together with an optimality certificate**: `proved=True`
@@ -69,7 +69,7 @@ All commands are run from the repository root. `results/` is created automatical
 | Paper item | Command | Notes |
 |---|---|---|
 | Four-engine random benchmark (23 instances) | `python run_benchmark.py --group random --tl 60 --out results/random.json` | needs CPLEX / SCIP / Gurobi for the external columns |
-| ATSPLIB, our solver only (19 instances) | `python run_benchmark.py --group atsplib --tl 60 --solver ours --out results/atsplib.json` | no external solver needed |
+| ATSPLIB, our solver only (27 instances) | `python run_benchmark.py --group atsplib --tl 60 --solver ours --out results/atsplib.json` | no external solver needed |
 | ATSPLIB with CPLEX / SCIP | `python run_benchmark.py --group atsplib --tl 60 --solver ours,cplex,scip --out results/atsplib_cplex.json` | |
 | Structural columns of the ATSPLIB table ($\Delta/Z_{AP}$, $|\tilde A|/n^2$) | `python scripts/atsplib_structure.py` | writes `results/atsplib_structure.json` |
 | Runtime distribution and scaling fit | `python scripts/fit_runtime.py` | 30 instances, best-of-5 below 1 s |
@@ -121,7 +121,7 @@ discipline depends on.
 │   └── cy/                 optional Cython kernel + element-wise validators
 ├── workers/                one subprocess per external solver
 ├── scripts/                experiments that are not the four-engine driver
-├── instances/              19 ATSPLIB instances used in the paper
+├── instances/              27 ATSPLIB instances used in the paper (19 distributed + 8 reconstructed ftv prefixes)
 ├── data/                   expected values and the JSON behind the paper tables
 ├── docs/                   protocol, implementation notes, reproducibility
 └── results/                outputs (created at run time)
@@ -152,7 +152,7 @@ every "ours" column and the SCIP columns.
 
 ## 6. Data and licences
 
-The ATSPLIB instances in `instances/` are redistributed under the terms of
+The 8 reconstructed `ftv90`–`ftv160` prefix instances and their cross-solver results are in `data/ftv_extra/` (see `docs/FTV27_RESULTS.md`). The ATSPLIB instances in `instances/` are redistributed under the terms of
 [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/); the published
 optima in `solver/atsp-sol.html` are used only to score a run and are never given to
 any solver.

@@ -1,0 +1,90 @@
+[
+ {
+  "instance": "ftv90",
+  "n": 91,
+  "published_OPT": 1579,
+  "M": 1610,
+  "concorde_opt": 148089,
+  "success": true,
+  "t": 1.36,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv100",
+  "n": 101,
+  "published_OPT": 1788,
+  "M": 1846,
+  "concorde_opt": 188234,
+  "success": true,
+  "t": 0.912,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv110",
+  "n": 111,
+  "published_OPT": 1958,
+  "M": 2011,
+  "concorde_opt": 225179,
+  "success": true,
+  "t": 1.399,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv120",
+  "n": 121,
+  "published_OPT": 2166,
+  "M": 2219,
+  "concorde_opt": 270665,
+  "success": true,
+  "t": 6.059,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv130",
+  "n": 131,
+  "published_OPT": 2307,
+  "M": 2362,
+  "concorde_opt": 311729,
+  "success": true,
+  "t": 1.991,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv140",
+  "n": 141,
+  "published_OPT": 2420,
+  "M": 2475,
+  "concorde_opt": 351395,
+  "success": true,
+  "t": 1.814,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv150",
+  "n": 151,
+  "published_OPT": 2611,
+  "M": 2666,
+  "concorde_opt": 405177,
+  "success": true,
+  "t": 1.323,
+  "decode": "ok",
+  "match": false
+ },
+ {
+  "instance": "ftv160",
+  "n": 161,
+  "published_OPT": 2683,
+  "M": 2687,
+  "concorde_opt": 435290,
+  "success": true,
+  "t": 4.743,
+  "decode": "ok",
+  "match": false
+ }
+]

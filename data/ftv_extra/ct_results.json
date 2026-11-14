@@ -1,0 +1,50 @@
+{
+ "ftv90": {
+  "proved": true,
+  "t": 7.77,
+  "nodes": 53468,
+  "cost": 1579.0
+ },
+ "ftv100": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 116229,
+  "cost": 1835.0
+ },
+ "ftv110": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 110450,
+  "cost": 2010.0
+ },
+ "ftv120": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 93750,
+  "cost": 2218.0
+ },
+ "ftv130": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 80716,
+  "cost": 2355.0
+ },
+ "ftv140": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 63674,
+  "cost": 2432.0
+ },
+ "ftv150": {
+  "proved": false,
+  "t": 20.0,
+  "nodes": 58577,
+  "cost": 2658.0
+ },
+ "ftv160": {
+  "proved": false,
+  "t": 20.001,
+  "nodes": 52456,
+  "cost": 2686.0
+ }
+}

@@ -1,0 +1,74 @@
+[
+ {
+  "instance": "ftv90",
+  "n": 91,
+  "OPT": 1579,
+  "cost": 1609,
+  "gap_pct": 1.8999,
+  "t": 2.843,
+  "proved": false
+ },
+ {
+  "instance": "ftv100",
+  "n": 101,
+  "OPT": 1788,
+  "cost": 1845,
+  "gap_pct": 3.1879,
+  "t": 2.347,
+  "proved": false
+ },
+ {
+  "instance": "ftv110",
+  "n": 111,
+  "OPT": 1958,
+  "cost": 2010,
+  "gap_pct": 2.6558,
+  "t": 2.279,
+  "proved": false
+ },
+ {
+  "instance": "ftv120",
+  "n": 121,
+  "OPT": 2166,
+  "cost": 2218,
+  "gap_pct": 2.4007,
+  "t": 2.171,
+  "proved": false
+ },
+ {
+  "instance": "ftv130",
+  "n": 131,
+  "OPT": 2307,
+  "cost": 2361,
+  "gap_pct": 2.3407,
+  "t": 2.429,
+  "proved": false
+ },
+ {
+  "instance": "ftv140",
+  "n": 141,
+  "OPT": 2420,
+  "cost": 2474,
+  "gap_pct": 2.2314,
+  "t": 3.222,
+  "proved": false
+ },
+ {
+  "instance": "ftv150",
+  "n": 151,
+  "OPT": 2611,
+  "cost": 2665,
+  "gap_pct": 2.0682,
+  "t": 42.969,
+  "proved": false
+ },
+ {
+  "instance": "ftv160",
+  "n": 161,
+  "OPT": 2683,
+  "cost": 2686,
+  "gap_pct": 0.1118,
+  "t": 60.019,
+  "proved": false
+ }
+]

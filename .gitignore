@@ -18,3 +18,7 @@ results/*
 # Cython-generated C
 solver/cy/*.c
 solver/cy/build/
+
+# Concorde / solver artifacts
+*.res
+*.sol
