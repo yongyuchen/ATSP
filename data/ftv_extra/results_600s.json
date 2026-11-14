@@ -1,0 +1,46 @@
+{
+ "ftv33": {
+  "instance": "ftv33",
+  "n": 34,
+  "OPT": 1286,
+  "cost": 1372.0,
+  "proved": false,
+  "overflow": true,
+  "nodes": 2630898,
+  "t": 22.13,
+  "gap_pct": 6.6874
+ },
+ "ftv70": {
+  "instance": "ftv70",
+  "n": 71,
+  "OPT": 1950,
+  "cost": 2004.0,
+  "proved": false,
+  "overflow": true,
+  "nodes": 2000011,
+  "t": 3.533,
+  "gap_pct": 2.7692
+ },
+ "kro124p": {
+  "instance": "kro124p",
+  "n": 100,
+  "OPT": 36230,
+  "cost": 38941.0,
+  "proved": false,
+  "overflow": true,
+  "nodes": 2000015,
+  "t": 3.067,
+  "gap_pct": 7.4827
+ },
+ "br17": {
+  "instance": "br17",
+  "n": 17,
+  "OPT": 39,
+  "cost": 39.0,
+  "proved": false,
+  "overflow": true,
+  "nodes": 2000009,
+  "t": 6.98,
+  "gap_pct": 0.0
+ }
+}
