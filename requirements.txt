@@ -1,0 +1,15 @@
+# Core requirements: the solver needs only numpy + scipy.
+numpy>=1.20
+scipy>=1.6
+
+# Optional external solvers, needed only for the corresponding baseline columns.
+# The driver skips a solver whose import or licence fails and records the reason.
+
+# SCIP (bundled binary):
+# pyscipopt>=4.0
+
+# Gurobi (needs a licence; MIPGap=0 is used):
+# gurobipy>=11.0
+
+# CPLEX is not pip-installable. It ships with IBM ILOG CPLEX Optimization Studio;
+# point CPLEX_STUDIO_DIR at the installation, or pass --cplex-py <interpreter>.

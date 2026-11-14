@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper and this repository."
+title: "bell-frieze-atsp: a certified solver for the random asymmetric TSP"
+abstract: >-
+  Reference implementation of the Bell-Frieze quasi-polynomial algorithm for the
+  random asymmetric traveling salesman problem, with an optimality certificate,
+  the benchmark drivers, and the ATSPLIB instances used in the paper.
+authors:
+  - family-names: Chen
+    given-names: Yongyu
+    affiliation: "Ural Federal University, Ekaterinburg, Russia"
+  - family-names: Khachay
+    given-names: Michael
+    affiliation: "Krasovsky Institute of Mathematics and Mechanics, Ekaterinburg, Russia"
+year: 2026
+license: MIT
+repository-code: "https://github.com/yongyuchen/bell-frieze-atsp"
+keywords:
+  - asymmetric traveling salesman problem
+  - assignment problem
+  - quasi-polynomial time
+  - branch and bound
+  - optimality certificate
