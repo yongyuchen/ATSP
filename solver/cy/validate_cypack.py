@@ -110,7 +110,10 @@ def main():
                   f"{str(m2 == mask_sorted):>6} {str(cm2 == cmask_sorted):>6} "
                   f"{str(s2 == suffix_or):>7} {str(cv2 == cover_list):>6} | "
                   f"{t1:8.3f} {t2:8.3f} {t1 / max(t2, 1e-9):7.1f}x", flush=True)
-            del cycles, costs, pairs, indptr, ccosts, m2, cm2, s2, cv2
+            # Keep `costs` bound: the cost-sorted lambda above refers to it.
+            # Rebinding instead of deleting avoids a stale-binding trap.
+            cycles = costs = None
+            del pairs, indptr, ccosts, m2, cm2, s2, cv2
             del mask_sorted, cmask_sorted, suffix_or, cover_list
             gc.collect()
     print(f"\nmismatches: {bad}")

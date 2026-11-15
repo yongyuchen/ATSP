@@ -1,4 +1,4 @@
-"""Structural statistics of the budget test, for the 19 ATSPLIB instances.
+"""Structural statistics of the budget test, for the 27 ATSPLIB instances.
 
 Reproduces the two structural columns of the paper's ATSPLIB table:
 

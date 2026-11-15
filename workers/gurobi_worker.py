@@ -20,12 +20,17 @@ import time
 
 import gurobipy as grb
 
-# Keep a runaway model from taking the machine down (OOM safety).
-# `resource` is unavailable on Windows; ignore it there.
+# Configurable OOM guard.  Defaults to the 8 GB data-segment limit used for
+# the runs reported in the paper; set QA_WORKER_RLIMIT_GB to another value,
+# or to 0 to disable it (e.g. on a machine with more RAM).
 try:
+    import os
     import resource
-    resource.setrlimit(resource.RLIMIT_DATA, (8 << 30, 8 << 30))
-except Exception:                     # noqa: BLE001
+    _gb = float(os.environ.get("QA_WORKER_RLIMIT_GB", "8"))
+    if _gb > 0:
+        _lim = int(_gb * (1 << 30))
+        resource.setrlimit(resource.RLIMIT_DATA, (_lim, _lim))
+except Exception:                     # noqa: BLE001  (Windows / restricted)
     pass
 
 

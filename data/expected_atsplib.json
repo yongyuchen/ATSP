@@ -169,5 +169,77 @@
   "ours_proved": false,
   "cplex_dfj_t": 0.38454246520996094,
   "scip_dfj_t": 1.545973300933838
+ },
+ {
+  "instance": "ftv100",
+  "n": 101,
+  "OPT": 1788,
+  "ours_t": 2.347,
+  "ours_proved": false,
+  "cplex_dfj_t": 0.654,
+  "scip_dfj_t": 3.397
+ },
+ {
+  "instance": "ftv110",
+  "n": 111,
+  "OPT": 1958,
+  "ours_t": 2.279,
+  "ours_proved": false,
+  "cplex_dfj_t": 0.933,
+  "scip_dfj_t": 2.66
+ },
+ {
+  "instance": "ftv120",
+  "n": 121,
+  "OPT": 2166,
+  "ours_t": 2.171,
+  "ours_proved": false,
+  "cplex_dfj_t": 1.582,
+  "scip_dfj_t": 6.843
+ },
+ {
+  "instance": "ftv130",
+  "n": 131,
+  "OPT": 2307,
+  "ours_t": 2.429,
+  "ours_proved": false,
+  "cplex_dfj_t": 1.18,
+  "scip_dfj_t": 4.018
+ },
+ {
+  "instance": "ftv140",
+  "n": 141,
+  "OPT": 2420,
+  "ours_t": 3.222,
+  "ours_proved": false,
+  "cplex_dfj_t": 1.82,
+  "scip_dfj_t": 1.691
+ },
+ {
+  "instance": "ftv150",
+  "n": 151,
+  "OPT": 2611,
+  "ours_t": 42.969,
+  "ours_proved": false,
+  "cplex_dfj_t": 1.237,
+  "scip_dfj_t": 4.507
+ },
+ {
+  "instance": "ftv160",
+  "n": 161,
+  "OPT": 2683,
+  "ours_t": 60.019,
+  "ours_proved": false,
+  "cplex_dfj_t": 2.071,
+  "scip_dfj_t": 7.819
+ },
+ {
+  "instance": "ftv90",
+  "n": 91,
+  "OPT": 1579,
+  "ours_t": 2.843,
+  "ours_proved": false,
+  "cplex_dfj_t": 0.647,
+  "scip_dfj_t": 0.802
  }
 ]

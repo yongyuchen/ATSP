@@ -7,8 +7,12 @@
    LKH treats the explicit matrix as symmetric and returns tours 100-240% above the
    Held-Karp optimum; with TYPE: ATSP it hits the optimum even at RUNS=1.)
 """
+import json
 import os
-import sys, os, json, time, tempfile, subprocess
+import subprocess
+import sys
+import tempfile
+import time
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(_ROOT, "solver"))
 import numpy as np

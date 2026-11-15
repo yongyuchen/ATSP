@@ -44,8 +44,8 @@ so a violation would be detected rather than silently absorbed.
 """
 import os
 import subprocess
+import sys
 import tempfile
-import time
 
 import numpy as np
 
@@ -186,7 +186,7 @@ try:
         "t": t1 - t0,
         "ncount": int(solver._ncount),
     }
-except BaseException as e:
+except Exception as e:
     payload = {"ok": False, "err": "{}: {}".format(type(e).__name__, e)}
 finally:
     os.dup2(saved, 1)

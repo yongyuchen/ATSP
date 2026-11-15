@@ -60,7 +60,6 @@ def check_conditions(C):
     phi = phi.astype(int)
     Z = float(C[np.arange(len(phi)), phi].sum())
     u, v = qa.optimal_duals(C, phi)
-    n = C.shape[0]
     fin = np.isfinite(C)
     rc_full = np.where(fin, C - u[:, None] - v[None, :], np.inf)
     c1 = float(rc_full[fin].min())

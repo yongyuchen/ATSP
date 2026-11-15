@@ -1,11 +1,11 @@
-# bell-frieze-atsp
+# ATSP
 
 A certified solver for the random Asymmetric Traveling Salesman Problem, based on
 the quasi-polynomial algorithm of Bell and Frieze
 ([arXiv:2308.02946](https://arxiv.org/abs/2308.02946)).
 
-This repository is the artifact for the paper *From Theoretical Bounds to
-Computational Reality: A Quasi-Polynomial Solver for Asymmetric Traveling Salesman
+This repository is the artifact for the paper *A Certifying Implementation of the
+Bell–Frieze Quasi-Polynomial Algorithm for the Asymmetric Traveling Salesman
 Problem*. It contains the solver, the optimality-certificate machinery, the
 benchmark drivers, the 27 ATSPLIB instances used in the paper, and the expected
 values used to check a run.
@@ -96,7 +96,15 @@ instances. Both are reproduced here.
 
 In both cases the matrix is i.i.d. `U(0,1)` off the diagonal and `+inf` on it.
 `data/expected_random.json` and `data/expected_atsplib.json` give the reference
-optimum and `Z_AP` for every instance; the driver checks them as it goes.
+optimum for every instance; the driver checks a run against them as it goes. The
+ATSPLIB job list is taken from `instances/` (27 files), not from the expected-value
+file, so a stale reference table cannot silently shrink a run.
+
+**One deliberate exception**, documented in the paper: the `n500_s1` entry of
+`expected_random.json` holds our un-warm-started heuristic upper bound
+`1.7193316948`, not the true optimum `1.6453830212`. A solver returning the true
+optimum on that row is therefore flagged `BAD` by the cost-agreement check; this
+is why the paper reports 22/23 agreement on the random set.
 
 ### What "proved" means
 
@@ -127,8 +135,8 @@ discipline depends on.
 └── results/                outputs (created at run time)
 ```
 
-`instances/random100.atsp` is deliberately not included: it is not one of the 19
-library instances in the paper.
+`instances/random100.atsp` is deliberately not included: it is not one of the 27
+ATSPLIB instances used in the paper.
 
 Inline comments in `solver/quasipoly_atsp.py` are partly in Chinese; the English
 summary of every non-obvious choice is `docs/IMPLEMENTATION_NOTES.md`.

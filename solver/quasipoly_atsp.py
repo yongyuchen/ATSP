@@ -114,7 +114,7 @@ import shutil
 import sys
 import tempfile
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
@@ -279,7 +279,6 @@ def optimal_duals(C: np.ndarray, phi: np.ndarray, tol: float = 1e-9,
     本函数就不再重复跑一次 O(n^3) 的 Hungarian. hungarian_with_duals 是确定性的,
     所以传进来的势与本地重算的**逐位相同**, 结果完全等价; 不传则行为与以前一致.
     """
-    n = C.shape[0]
     fin = np.isfinite(C)
     scale = max(1.0, float(np.abs(C[fin]).max()))
 
@@ -1219,8 +1218,15 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
 
     if n <= 4:                                        # 兜底: 暴力
         best_c, best_t = _brute_force(C)
-        return Result(best_c, best_t, float("nan"), 0.0, 0, 0, 0, best_c,
-                      time.time() - t_start, proved=True)
+        # Even on this fallback the certificate fields must be well-formed:
+        # Z_AP is the assignment lower bound and, since brute force here is
+        # exhaustive, the optimum itself is a valid (tight) lower bound.
+        phi0, _, _ = hungarian_with_duals(C)
+        z_ap = float(C[np.arange(n), phi0].sum())
+        best_c = float(best_c)
+        return Result(best_c, best_t, z_ap, best_c - z_ap, 0, 0, 0, best_c,
+                      time.time() - t_start, proved=True,
+                      lb_cert=best_c, rung_ok=0)
 
     # ---- 步骤 1,2: AP + 对偶 + 最优基树 ----
     # 只跑一次 Hungarian: 势 (u_h, v_h) 直接交给 optimal_duals, 否则它内部会
@@ -1519,15 +1525,26 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
             for a in S_list:
                 c += C[a, base_phi[psi_arr[a]]] - C[a, base_phi[a]]
             if c < best_found_cost - 1e-12:
-                best_found_cost = c
-                best_rc = c - Z_AP
                 succ = [base_phi[psi_arr[i]] if psi_arr[i] >= 0 else base_phi[i]
                         for i in range(n)]
+                # Guard against a malformed successor map: a non-Hamiltonian
+                # succ must never turn this walk into an infinite loop, and the
+                # incumbent is committed only after the tour has been verified.
                 tour = [0]
                 y = succ[0]
-                while y != 0:
+                closed = False
+                for _ in range(n + 1):
+                    if y == 0:
+                        closed = True
+                        break
+                    if not (0 <= y < n):
+                        break
                     tour.append(y)
                     y = succ[y]
+                if not closed or len(tour) != n:
+                    return
+                best_found_cost = c
+                best_rc = c - Z_AP
                 best_out = tour
 
         # 统一视图的本地绑定: rec() 是热点, 而 RAM 视图的这几个方法只是列表
@@ -1547,14 +1564,15 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
             if nodes > search_cap:
                 hit_cap = True
                 return True
-            if deadline is not None and (nodes & 1023) == 0 and time.time() > deadline:
+            if deadline is not None and (nodes & 255) == 0 and time.time() > deadline:
                 hit_cap = True
                 return True
             if covered == full_mask:
                 evaluate(rcsum)
             if depth >= dcap:
-                if dcap < max_cycles:
-                    depth_limited[0] = True
+                # Any depth truncation disqualifies a certificate.  The flag is
+                # reset before each pass, so only the full-depth pass survives.
+                depth_limited[0] = True
                 return False
 
             if covered != full_mask:
@@ -1583,11 +1601,7 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
                         lb = v
                 if rcsum + lb >= best_rc:
                     return False
-            cand = None
-
-            rng = range(start, _n_cyc)
-            for k in rng:
-                idx = k if cand is None else cand[k]
+            for idx in range(start, _n_cyc):
                 if used & _v_mask(idx):
                     continue
                 nc = rcsum + _v_cost(idx)
@@ -1608,7 +1622,12 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
         # 深度爬梯子: 先用 <=2 / <=3 个圈的浅层拼装快速挖出好解来压 UB,
         # 收紧后的 best_rc 再让最后一层完整搜索便宜得多.
         improved_this_round = False
-        for dcap in sorted({2, 3, max_cycles}):
+        # max_cycles must be respected even when it is below 3, and the last
+        # pass must be the full-depth one.  depth_limited is reset per pass,
+        # hence the final value describes the full-depth pass only.
+        dcap_passes = sorted({d for d in (2, 3, max_cycles)
+                              if d <= max_cycles} or {max_cycles})
+        for dcap in dcap_passes:
             # 上一轮可能因撞上限/超时提前 return, 递归栈没有逐层回溯,
             # 于是 psi_arr / S_list 仍带着部分解. 每一层重新开始前必须清空,
             # 否则下一层会把已占用的城市再放一次, 拼出的 psi 不是置换.
@@ -1622,7 +1641,7 @@ def solve(C, use_local_search: bool = True, cycle_cap: int = 200_000,
                 budget = best_cost - Z_AP
                 best_rc = budget
                 improved_this_round = True
-                if budget <= 1e-12 or dcap < max_cycles:
+                if budget <= 1e-12 or dcap < dcap_passes[-1]:
                     break                          # 回外层用更小预算重新开始
         total_nodes += nodes
         if hit_cap:

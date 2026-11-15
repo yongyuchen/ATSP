@@ -49,8 +49,8 @@ PLAN_SMALL = [(20, (1, 2, 3)), (30, (1, 2, 3)), (50, (1, 2, 3)),
               (80, (1, 2, 3)), (100, (1, 2, 3)), (150, (1, 2)),
               (200, (1, 2)), (300, (1, 2))]
 PLAN_LARGE = [(500, (1,)), (800, (1,))]
-# the 19 ATSPLIB instances used in the paper's tab:atsplib (random100 excluded)
-ATSPLIB_NAMES = None      # filled from data/expected_atsplib.json when present
+# the 27 ATSPLIB instances used in the paper's ATSPLIB table (random100 excluded)
+ATSPLIB_NAMES = None      # filled from instances/ at first use
 
 
 def random_inst(n, seed):
@@ -298,15 +298,17 @@ def solve_row(name, key, C, OPT, tl, solvers, cfg):
 
 # ------------------------------------------------------------------- drivers
 def atsplib_names():
+    """Every ATSPLIB instance shipped with this artifact.
+
+    The instance directory is authoritative: the expected-value file only
+    supplies reference costs and must never silently shrink the run (it still
+    held 19 rows after the paper's set grew to 27).
+    """
     global ATSPLIB_NAMES
     if ATSPLIB_NAMES is None:
-        exp = load_json(os.path.join(DATA, "expected_atsplib.json"), None)
-        if exp:
-            ATSPLIB_NAMES = [e["instance"] for e in exp]
-        else:
-            ATSPLIB_NAMES = sorted(
-                f[:-5] for f in os.listdir(INST) if f.endswith(".atsp")
-                and f[:-5] != "random100")
+        ATSPLIB_NAMES = sorted(
+            f[:-5] for f in os.listdir(INST) if f.endswith(".atsp")
+            and f[:-5] != "random100")
     return ATSPLIB_NAMES
 
 
@@ -387,7 +389,6 @@ def main():
                     load_json(os.path.join(DATA, "expected_random.json"), [])}
         for n, seed in expand(PLAN_SMALL) + expand(PLAN_LARGE):
             jobs.append(("r%d_%d" % (n, seed), n, seed, expected))
-    n_before = len(jobs)
     if args.group in ("atsplib", "all"):
         opt_tab = atsplib.known_optima()
         for name in atsplib_names():

@@ -12,7 +12,6 @@ closes back to its start p0.
 """
 import os
 import sys
-import time
 
 import numpy as np
 

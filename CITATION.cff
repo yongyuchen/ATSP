@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the paper and this repository."
-title: "bell-frieze-atsp: a certified solver for the random asymmetric TSP"
+title: "ATSP: a certifying implementation of the Bell-Frieze quasi-polynomial algorithm"
 abstract: >-
   Reference implementation of the Bell-Frieze quasi-polynomial algorithm for the
   random asymmetric traveling salesman problem, with an optimality certificate,
@@ -14,7 +14,7 @@ authors:
     affiliation: "Krasovsky Institute of Mathematics and Mechanics, Ekaterinburg, Russia"
 year: 2026
 license: MIT
-repository-code: "https://github.com/yongyuchen/bell-frieze-atsp"
+repository-code: "https://github.com/yongyuchen/ATSP"
 keywords:
   - asymmetric traveling salesman problem
   - assignment problem

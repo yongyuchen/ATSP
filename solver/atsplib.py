@@ -11,6 +11,7 @@ import re
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+INST = os.path.join(os.path.dirname(HERE), "instances")
 BIG = 9_999_999  # TSPLIB's "infinite" placeholder in ft*/ftv*/kro124p
 
 
@@ -51,7 +52,8 @@ def known_optima():
 
 
 def available():
-    return sorted(f for f in os.listdir(HERE) if f.endswith(".atsp"))
+    """ATSPLIB instance files shipped with this artifact (27 as of the paper)."""
+    return sorted(f for f in os.listdir(INST) if f.endswith(".atsp"))
 
 
 def describe(name, C):
@@ -73,7 +75,7 @@ if __name__ == "__main__":
     print(f"{'name':10s} {'n':>5s} {'infeas':>7s} {'min':>6s} {'max':>9s} "
           f"{'zeros':>7s} {'Z_AP':>10s} {'opt':>8s} {'gap%':>7s}")
     for f in available():
-        nm, C = read_atsp(os.path.join(HERE, f))
+        nm, C = read_atsp(os.path.join(INST, f))
         d = describe(nm, C)
         r, c = linear_sum_assignment(C)
         z = float(C[r, c].sum())

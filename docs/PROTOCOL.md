@@ -38,16 +38,19 @@ behind the runtime distribution and the scaling fit.
 
 ## ATSPLIB
 
-Nineteen instances, the ones the paper uses:
+Twenty-seven instances, the ones in the paper's ATSPLIB table:
 
 ```
 br17  ft53  ft70  ftv33  ftv35  ftv38  ftv44  ftv47  ftv55  ftv64
-ftv70 ftv170 kro124p p43 rbg323 rbg358 rbg403 rbg443 ry48p
+ftv70 ftv90 ftv100 ftv110 ftv120 ftv130 ftv140 ftv150 ftv160 ftv170
+kro124p p43 rbg323 rbg358 rbg403 rbg443 ry48p
 ```
 
-`ftv90`–`ftv160` are not shipped by TSPLIB as files; per TSPLIB95 §3.3 they are the
-prefix subproblems of `ftv170`. They are therefore not in this release, matching the
-paper.
+TSPLIB distributes 19 of these as files. The eight `ftv90`–`ftv160` instances are,
+per TSPLIB95 §3.3, prefix subproblems of `ftv170`; they are reconstructed here by
+taking the leading `X+1` rows and columns of `ftv170` and are included in
+`instances/`. Their published optima were verified independently by Concorde,
+CPLEX-DFJ and SCIP-DFJ (8/8 each); see `docs/FTV27_RESULTS.md`.
 
 Matrices are read as explicit full matrices. Every entry at or above the TSPLIB
 sentinel `9 999 999` becomes `+inf`, and the diagonal becomes `+inf` regardless of
@@ -63,6 +66,7 @@ what the file carries.
 | DFJ | assignment + subtour elimination by lazy cuts |
 | MTZ | assignment + Miller–Tucker–Zemlin, only for `n <= 300` |
 | Warm start | none, unless a table says otherwise |
+| Memory guard | 8 GB `RLIMIT_DATA` per worker; override with `QA_WORKER_RLIMIT_GB` (`0` disables) |
 
 CPLEX statuses 101 (*integer optimal*) and 102 (*integer optimal, tolerance*) both
 count as certificates, at the solver's default MIP tolerance. Every reported optimum
